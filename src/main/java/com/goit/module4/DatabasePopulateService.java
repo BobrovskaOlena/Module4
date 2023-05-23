@@ -6,16 +6,14 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-
-public class DatabaseInitService {
-    public static void main(String[] args) throws SQLException {
-         //завдання 1
+public class DatabasePopulateService {
+    public static void main(String[] args) {
+        //завдання 3
         Connection connection = H2Database.getInstance().getH2Connection();
-        //завдання 2
         H2Database h2Database = H2Database.getInstance();
-        String sqlFilePath = "src/main/resources/com/goit/module4/sql/init_db.sql";
+        String sqlFilePath1 = "src/main/resources/com/goit/module4/sql/populate_db.sql";
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(sqlFilePath))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(sqlFilePath1))) {
             StringBuilder queryBuilder = new StringBuilder();
             String line;
 
@@ -23,14 +21,15 @@ public class DatabaseInitService {
                 queryBuilder.append(line);
                 if (line.trim().endsWith(";")) {
                     String query = queryBuilder.toString();
-                    h2Database.executeUpdate(query);
-                    queryBuilder.setLength(0);  // Очищуємо буфер
+                    connection.createStatement().executeUpdate(query);
+                    queryBuilder.setLength(0);
                 }
             }
-        } catch (IOException e) {
+        } catch (IOException | SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            H2Database.closeConnection();
+                H2Database.closeConnection();
+
         }
     }
 }

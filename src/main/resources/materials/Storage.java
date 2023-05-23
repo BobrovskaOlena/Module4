@@ -1,4 +1,4 @@
-package com.goit.module4;
+package materials;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

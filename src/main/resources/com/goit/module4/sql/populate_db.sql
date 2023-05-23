@@ -2,12 +2,12 @@ INSERT INTO worker (id, "name",birthday, salary, "level")
 VALUES
 (1, 'Anton Skliar','1992-02-05', 900, 'Trainee'),
 (2, 'Mary Jonson', '1996-07-05', 1200, 'Junior'),
-(3, 'Daniil Bee', '1998-02-31', 1500, 'Middle'),
-(4, 'Olena Bobrovska', '1991-02-05', 2500, 'Middle'),
+(3, 'Daniil Bee', '1998-02-21', 1500, 'Middle'),
+(4, 'Olena Bobrovska', '1998-07-28', 2500, 'Middle'),
 (5, 'Daniel Ram', '1999-06-05', 3600, 'Senior'),
 (6, 'Karina Kostenko', '1998-02-22', 3000, 'Middle'),
 (7, 'Oleg Logenko', '1996-02-05', 3100, 'Middle'),
-(8, 'Alisa Borysenko', '1994-02-30', 4000, 'Senior'),
+(8, 'Alisa Borysenko', '1994-02-10', 4000, 'Senior'),
 (9, 'Tom Kristen', '1988-04-23', 4500, 'Senior'),
 (10, 'Olia Kristenko', '1983-09-01', 5500, 'Senior');
 

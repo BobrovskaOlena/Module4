@@ -1,4 +1,4 @@
-package com.goit.module4;
+package materials;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

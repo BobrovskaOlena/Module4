@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class H2Database {
     private static final H2Database INSTANCE = new H2Database();
-    private Connection h2Connection;
+    private static Connection h2Connection;
     private H2Database(){
         try{
             String h2ConnectionUrl = "jdbc:h2:./test";
@@ -33,7 +33,7 @@ public class H2Database {
             throw new RuntimeException(e);
         }
     }
-    public void closeConnection(){
+    public static void closeConnection(){
         try {
         h2Connection.close();
         }catch (SQLException e){
