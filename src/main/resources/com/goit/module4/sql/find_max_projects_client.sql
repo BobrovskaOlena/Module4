@@ -1,8 +1,8 @@
-SELECT c.*, COUNT(p.client_id) AS project_count
-FROM client c
-LEFT JOIN project p ON c.id = p.client_id
-GROUP BY c.id
-HAVING COUNT(p.client_id) = (
+SELECT client.*, COUNT(project.client_id) AS project_count
+FROM client
+LEFT JOIN project ON client.id = project.client_id
+GROUP BY client.id
+HAVING COUNT(project.client_id) = (
     SELECT COUNT(client_id)
     FROM project
     GROUP BY client_id
