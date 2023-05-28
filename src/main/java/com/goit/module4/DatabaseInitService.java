@@ -13,9 +13,9 @@ public class DatabaseInitService {
         Connection connection = H2Database.getInstance().getH2Connection();
         //завдання 2
         H2Database h2Database = H2Database.getInstance();
-        String sqlFilePath = "src/main/resources/com/goit/module4/sql/init_db.sql";
+        String sqlFilePathInit = "src/main/resources/com/goit/module4/sql/init_db.sql";
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(sqlFilePath))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(sqlFilePathInit))) {
             StringBuilder queryBuilder = new StringBuilder();
             String line;
 

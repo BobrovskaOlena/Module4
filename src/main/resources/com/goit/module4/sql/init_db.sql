@@ -1,14 +1,14 @@
 CREATE TABLE worker(
 id BIGINT PRIMARY KEY,
-"name" VARCHAR(1000) NOT NULL CHECK(LENGTH("name")>=2 AND LENGTH("name")<=1000),
+name VARCHAR(1000) NOT NULL CHECK(LENGTH(name)>=2 AND LENGTH(name)<=1000),
 birthday DATE CHECK (birthday>'1900-12-31'),
-"level" VARCHAR NOT NULL CHECK ("level" IN ('Trainee', 'Junior', 'Middle', 'Senior')),
+levels VARCHAR NOT NULL CHECK (levels IN ('Trainee', 'Junior', 'Middle', 'Senior')),
 salary INT CHECK (salary>=100 AND salary<=100000)
 );
 
 CREATE TABLE client(
 id BIGINT PRIMARY KEY,
-"name" VARCHAR(1000) NOT NULL CHECK(LENGTH("name")>=2 AND LENGTH("name")<=1000)
+name VARCHAR(1000) NOT NULL CHECK(LENGTH(name)>=2 AND LENGTH(name)<=1000)
 );
 
 CREATE TABLE project(
