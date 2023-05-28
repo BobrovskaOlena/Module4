@@ -1,14 +1,14 @@
 package com.goit.module4;
 
 import java.sql.*;
+import java.util.Objects;
 
 public class H2Database {
     private static final H2Database INSTANCE = new H2Database();
     private static Connection h2Connection;
     private H2Database(){
         try{
-            String h2ConnectionUrl = "jdbc:h2:./test";
-            this.h2Connection = DriverManager.getConnection(h2ConnectionUrl);
+            h2Connection = DriverManager.getConnection(Objects.requireNonNull(Property.getConnectionUrlForH2()));
         }catch (SQLException e){
             throw new RuntimeException("Create connection exception");
         }
@@ -19,12 +19,14 @@ public class H2Database {
     public Connection getH2Connection(){
         return h2Connection;
     }
-    public int executeUpdate(String query){
-        try (Statement statement = INSTANCE.getH2Connection().createStatement()){
-            return statement.executeUpdate(query);
-        }catch (SQLException e) {
+    public int executeUpdate(String query) {
+        int result;
+        try (Statement statement = INSTANCE.getH2Connection().createStatement()) {
+            result = statement.executeUpdate(query);
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return result;
     }
     public ResultSet executeQuery(String query) {
         try (Statement statement = INSTANCE.getH2Connection().createStatement()) {
