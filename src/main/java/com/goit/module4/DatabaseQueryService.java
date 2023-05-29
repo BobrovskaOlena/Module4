@@ -3,12 +3,10 @@ package com.goit.module4;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
 
 
 public class DatabaseQueryService {
@@ -26,19 +24,19 @@ public class DatabaseQueryService {
     public List<MaxSalaryWorker> findMaxSalaryWorker() {
         String sqlFilePath1 = "src/main/resources/com/goit/module4/sql/find_max_salary_worker.sql";
         List<MaxSalaryWorker> result = new ArrayList<>();
-        try (BufferedReader reader1 = new BufferedReader(new FileReader(sqlFilePath1));)
-            {
+        try (BufferedReader reader1 = new BufferedReader(new FileReader(sqlFilePath1)))
+        {
             String query1 = reader1.readLine();
-            ResultSet resultSet = statement.executeQuery(query1);
-
-            while (resultSet.next()) {
-                long id = resultSet.getLong(1);
-                String name = resultSet.getString("name");
-                String birthday = resultSet.getString("birthday");
-                String levels = resultSet.getString("levels");
-                int salary = resultSet.getInt(5);
-                MaxSalaryWorker worker1 = new MaxSalaryWorker(id, name, birthday, levels, salary);
-                result.add(worker1);
+            try (ResultSet resultSet = statement.executeQuery(query1)) {
+                while (resultSet.next()) {
+                    long ID = resultSet.getLong("ID");
+                    String name = resultSet.getString("name");
+                    String birthday = resultSet.getString("birthday");
+                    String levels = resultSet.getString("levels");
+                    int salary = resultSet.getInt(5);
+                    MaxSalaryWorker worker1 = new MaxSalaryWorker(ID, name, birthday, levels, salary);
+                    result.add(worker1);
+                }
             }
         } catch (IOException | SQLException e) {
             throw new RuntimeException(e);
@@ -46,6 +44,7 @@ public class DatabaseQueryService {
 
         return result;
     }
+
     public List<MaxProjectCountClient> findMaxProjectsClient() {
         String sqlFilePath2 = "src/main/resources/com/goit/module4/sql/find_max_projects_client.sql";
         List<MaxProjectCountClient> result = new ArrayList<>();
