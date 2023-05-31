@@ -7,4 +7,8 @@ public class LongestProject {
         this.id = id;
         this.months=months;
     }
+    @Override
+    public String toString(){
+        return "Longest Project [ID=" + id + ", months=" + months +"]";
+    }
 }

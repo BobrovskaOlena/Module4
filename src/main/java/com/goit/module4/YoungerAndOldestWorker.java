@@ -9,4 +9,8 @@ public class YoungerAndOldestWorker {
         this.name=name;
         this.birthday=birthday;
     }
+    @Override
+    public String toString(){
+        return "[type=" + type + ", name=" + name + ", birthday=" + birthday + "]";
+    }
 }

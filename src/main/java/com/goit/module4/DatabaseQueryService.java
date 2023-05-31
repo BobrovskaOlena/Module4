@@ -26,7 +26,12 @@ public class DatabaseQueryService {
         List<MaxSalaryWorker> result = new ArrayList<>();
         try (BufferedReader reader1 = new BufferedReader(new FileReader(sqlFilePath1)))
         {
-            String query1 = reader1.readLine();
+            StringBuilder queryBuilder = new StringBuilder();
+            String line;
+            while ((line = reader1.readLine()) != null) {
+                queryBuilder.append(line);
+            }
+            String query1 = queryBuilder.toString();
             try (ResultSet resultSet = statement.executeQuery(query1)) {
                 while (resultSet.next()) {
                     long ID = resultSet.getLong("ID");
@@ -49,17 +54,21 @@ public class DatabaseQueryService {
         String sqlFilePath2 = "src/main/resources/com/goit/module4/sql/find_max_projects_client.sql";
         List<MaxProjectCountClient> result = new ArrayList<>();
 
-        try (BufferedReader reader2 = new BufferedReader(new FileReader(sqlFilePath2));
-             Statement statement = connection.createStatement()) {
-
-            String query2 = reader2.readLine();
+        try (BufferedReader reader2 = new BufferedReader(new FileReader(sqlFilePath2)))
+              {
+                  StringBuilder queryBuilder = new StringBuilder();
+                  String line;
+                  while ((line = reader2.readLine()) != null) {
+                      queryBuilder.append(line);
+                  }
+                  String query2 = queryBuilder.toString();
             ResultSet resultSet = statement.executeQuery(query2);
 
             while (resultSet.next()) {
                 String name = resultSet.getString("name");
                 int projectCount = resultSet.getInt("project_count");
-                MaxProjectCountClient client = new MaxProjectCountClient(name, projectCount);
-                result.add(client);
+                MaxProjectCountClient maxProjectCountClient = new MaxProjectCountClient(name, projectCount);
+                result.add(maxProjectCountClient);
             }
         } catch (IOException | SQLException e) {
             throw new RuntimeException(e);
@@ -71,10 +80,15 @@ public class DatabaseQueryService {
         String sqlFilePath3 = "src/main/resources/com/goit/module4/sql/find_longest_project.sql";
         List<LongestProject> result = new ArrayList<>();
 
-        try (BufferedReader reader3 = new BufferedReader(new FileReader(sqlFilePath3));
-             Statement statement = connection.createStatement()) {
+        try (BufferedReader reader3 = new BufferedReader(new FileReader(sqlFilePath3)))
+             {
+            StringBuilder queryBuilder = new StringBuilder();
+            String line;
+            while ((line = reader3.readLine()) != null) {
+                queryBuilder.append(line);
+            }
+            String query3 = queryBuilder.toString();
 
-            String query3 = reader3.readLine();
             ResultSet resultSet = statement.executeQuery(query3);
 
             while (resultSet.next()) {
@@ -94,10 +108,13 @@ public class DatabaseQueryService {
         String sqlFilePath4 = "src/main/resources/com/goit/module4/sql/find_youngest_eldest_workers.sql";
         List<YoungerAndOldestWorker> result = new ArrayList<>();
 
-        try (BufferedReader reader4 = new BufferedReader(new FileReader(sqlFilePath4));
-             Statement statement = connection.createStatement()) {
-
-            String query4 = reader4.readLine();
+        try (BufferedReader reader4 = new BufferedReader(new FileReader(sqlFilePath4))) {
+            StringBuilder queryBuilder = new StringBuilder();
+            String line;
+            while ((line = reader4.readLine()) != null) {
+                queryBuilder.append(line);
+            }
+            String query4 = queryBuilder.toString();
             ResultSet resultSet = statement.executeQuery(query4);
 
             while (resultSet.next()) {
@@ -118,10 +135,13 @@ public class DatabaseQueryService {
         String sqlFilePath5 = "src/main/resources/com/goit/module4/sql/print_project_prices.sql";
         List<ProjectPrice> result = new ArrayList<>();
 
-        try (BufferedReader reader5 = new BufferedReader(new FileReader(sqlFilePath5));
-             Statement statement = connection.createStatement()) {
-
-            String query5 = reader5.readLine();
+        try (BufferedReader reader5 = new BufferedReader(new FileReader(sqlFilePath5))) {
+            StringBuilder queryBuilder = new StringBuilder();
+            String line;
+            while ((line = reader5.readLine()) != null) {
+                queryBuilder.append(line);
+            }
+            String query5 = queryBuilder.toString();
             ResultSet resultSet = statement.executeQuery(query5);
 
             while (resultSet.next()) {
@@ -133,15 +153,30 @@ public class DatabaseQueryService {
         } catch (IOException | SQLException e) {
             throw new RuntimeException(e);
         }
-
         return result;
     }
     public static void main(String[] args) {
         DatabaseQueryService queryService = new DatabaseQueryService();
-        List<MaxSalaryWorker> maxSalaryWorkers = queryService.findMaxSalaryWorker();
-        //List<MaxProjectCountClient> maxProjectCountClients = queryService.findMaxProjectsClient();
-        //List<LongestProject> longestProjects = queryService.findLongestProject();
-        //List<YoungerAndOldestWorker> youngerAndOldestWorkers = queryService.findYoungestAndEldestWorkers();
-        //List<ProjectPrice> projectPrices = queryService.printProjectPrices();
+        List <MaxSalaryWorker> maxSalaryWorkers= queryService.findMaxSalaryWorker();
+        for (MaxSalaryWorker worker : maxSalaryWorkers) {
+            System.out.println(worker.toString());
+        }
+        List<MaxProjectCountClient> maxProjectCountClients = queryService.findMaxProjectsClient();
+        System.out.println("Max project count client -> " + maxProjectCountClients.size());
+        for (MaxProjectCountClient maxProjectCountClient : maxProjectCountClients) {
+            System.out.println("MaxProjectCountClient --> " + maxProjectCountClient.toString());
+        }
+        List<LongestProject> longestProjects = queryService.findLongestProject();
+        for (LongestProject longestProject : longestProjects) {
+            System.out.println("Longest projects --> " + longestProject.toString());
+        }
+        List<YoungerAndOldestWorker> youngerAndOldestWorkers = queryService.findYoungestAndEldestWorkers();
+        for (YoungerAndOldestWorker youngerAndOldestWorker : youngerAndOldestWorkers) {
+            System.out.println("Younger and oldest workers: --> " + youngerAndOldestWorker.toString());
+        }
+        List<ProjectPrice> projectPrices = queryService.printProjectPrices();
+        for (ProjectPrice projectPrice : projectPrices) {
+            System.out.println("Project price is --> " + projectPrice.toString());
+        }
     }
 }

@@ -7,4 +7,8 @@ public class ProjectPrice {
         this.id=id;
         this.projectCost=projectCost;
     }
+    @Override
+    public String toString(){
+        return "[ID=" + id + ", projectCost=" + projectCost + "]";
+    }
 }

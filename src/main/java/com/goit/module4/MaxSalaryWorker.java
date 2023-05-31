@@ -13,4 +13,8 @@ public class MaxSalaryWorker {
         this.salary = salary;
         this.ID=ID;
     }
+    @Override
+    public String toString(){
+        return "MaxSalaryWorker [ID=" + ID + ", name=" + name + ", birthday=" + birthday + ", levels=" + levels + ", salary=" + salary + "]";
+    }
 }
